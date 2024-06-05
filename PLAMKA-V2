@@ -1,0 +1,114 @@
+local Chat = game:GetService('Players')
+local prefix = "-"
+local nokill = true
+local anticrash = true
+local spamming = false
+local Wspamming = "nothing"
+local gameFlr = workspace.Terrain._Game
+local adminFlr = gameFlr.Admin
+local perm = true
+
+	if string.sub(msg:lower(), 0, 7) == prefix.."super " then
+		for i = 1,100 do
+			game.Players:Chat(string.sub(msg:lower(), 8))
+		end
+	end
+
+	if string.sub(msg:lower(), 0, 6) == prefix.."spam " then
+		Wspamming = string.sub(msg:lower(), 7)
+		spamming = true
+	end
+
+
+if string.sub(msg:lower(), 0, 10) == prefix.."clearlogs" then
+		for i = 1,100 do
+			Chat("ff ")
+		end
+
+	
+
+function addcommand(cmdName, cmdDescription, cmdFunction)
+    commands[cmdName] = cmdName
+    descriptions[cmdName] = cmdDescription
+    connections[#connections + 1] = plr.Chatted:Connect(function(msg)
+            msg = msg:lower()
+            args = msg:split(" ")
+            if args[1] == admin.prefix3 .. cmdName then
+                cmdFunction()
+            elseif args[1] == "/e" and args[2] == admin.prefix3 .. cmdName then
+                args[2] = args[3]
+                cmdFunction()
+            end
+        end)
+end
+
+
+  if string.sub(msg:lower(), 1, 6) == prefix.."jail " then
+    local plr = string.sub(msg:lower(), 7, msg:len())
+
+    if plr == "all" then
+      for k,v in pairs(Players:GetPlayers()) do
+        game.Players:Chat("freeze "..v.name)
+		    game.Players:Chat("name "..v.name.." ")
+		    game.Players:Chat("thaw "..v.name)
+      end
+    elseif plr == "others" then
+      for k,v in pairs(Players:GetPlayers()) do
+        if v.name ~= Players.LocalPlayer.name then
+          game.Players:Chat("freeze "..v.name)
+		      game.Players:Chat("name "..v.name.." ")
+		      game.Players:Chat("thaw "..v.name)
+        end
+      end
+    elseif plr == "me" then
+      game.Players:Chat("freeze "..player.name)
+		  game.Players:Chat("name "..player.name.." ")
+		  game.Players:Chat("thaw "..player.name)
+    else
+      game.Players:Chat("freeze "..plr)
+		  game.Players:Chat("name "..plr.." ")
+		  game.Players:Chat("thaw "..plr)
+    end
+  end
+
+    if anticrash == true then
+      for _,playor in pairs(game.Players:GetPlayers()) do
+        if playor.Character then
+          if playor.Character:FindFirstChild("VampireVanquisher") then
+            local plrname = playor.Name
+            game.Players:Chat(("ungear "..plrname))
+            game.Players:Chat(("punish "..plrname))
+            game.Players:Chat(prefix.."sm [ANTI-CRASH] \n\n\n\n "..plrname.." why you tryed to crash server?")
+            wait(0)
+          end
+          if playor.Character:FindFirstChild("HumanoidRootPart") then
+            if playor.Character.HumanoidRootPart.Size.Y <= 0.4 then
+              local plrname = playor.Name
+              game.Players:Chat(("reset "..plrname))
+              game.Players:Chat(("punish all,"..plrname))
+              wait(0)
+            end
+          end
+        end
+      end
+    end
+
+
+    coroutine.wrap(function() -- Perm
+			local spr = game.Players.LocalPlayer.Character:FindFirstChild("Head")
+			if perm ~= true or adminFlr.Pads:FindFirstChild(game.Players.LocalPlayer.Name.."'s admin") ~= nil then 
+			else
+				pcall(function()
+					local pad = adminFlr.Pads:FindFirstChild("Touch to get admin")
+					local a = pad.Head
+					firetouchinterest(a, spr, 1)
+                    firetouchinterest(a, spr, 0)
+                    firetouchinterest(a, spr, 1)
+					task.wait()
+					firetouchinterest(a, spr, 0)
+				end)
+			end
+        end)()
+    end
+end)
+
