@@ -1,12 +1,12 @@
 local Chat = game:GetService('Players')
 local prefix = "-"
-local nokill = true
 local anticrash = true
 local spamming = false
 local Wspamming = "nothing"
 local gameFlr = workspace.Terrain._Game
 local adminFlr = gameFlr.Admin
 local perm = true
+local antikill = true
 
 	if string.sub(msg:lower(), 0, 7) == prefix.."super " then
 		for i = 1,100 do
@@ -43,33 +43,7 @@ function addcommand(cmdName, cmdDescription, cmdFunction)
 end
 
 
-  if string.sub(msg:lower(), 1, 6) == prefix.."jail " then
-    local plr = string.sub(msg:lower(), 7, msg:len())
-
-    if plr == "all" then
-      for k,v in pairs(Players:GetPlayers()) do
-        game.Players:Chat("freeze "..v.name)
-		    game.Players:Chat("name "..v.name.." ")
-		    game.Players:Chat("thaw "..v.name)
-      end
-    elseif plr == "others" then
-      for k,v in pairs(Players:GetPlayers()) do
-        if v.name ~= Players.LocalPlayer.name then
-          game.Players:Chat("freeze "..v.name)
-		      game.Players:Chat("name "..v.name.." ")
-		      game.Players:Chat("thaw "..v.name)
-        end
-      end
-    elseif plr == "me" then
-      game.Players:Chat("freeze "..player.name)
-		  game.Players:Chat("name "..player.name.." ")
-		  game.Players:Chat("thaw "..player.name)
-    else
-      game.Players:Chat("freeze "..plr)
-		  game.Players:Chat("name "..plr.." ")
-		  game.Players:Chat("thaw "..plr)
-    end
-  end
+ 
 
     if anticrash == true then
       for _,playor in pairs(game.Players:GetPlayers()) do
@@ -108,7 +82,88 @@ end
 					firetouchinterest(a, spr, 0)
 				end)
 			end
+
+
+	if string.sub(msg:lower(), 0, 4) == prefix.."bok" then
+		wait(0.5)
+		local Luser = string.sub(msg:lower(), 6)..","
+		game.Players:Chat(prefix.."super dog "..string.sub(msg:lower(), 6)..","..string.sub(msg:lower(), 6)..","..string.sub(msg:lower(), 6)..","..string.sub(msg:lower(), 6)..","..string.sub(msg:lower(), 6)..","..string.sub(msg:lower(), 6)..","..string.sub(msg:lower(), 6)..","..string.sub(msg:lower(), 6))
+		wait(3)
+		game.Players:Chat("kill "..string.sub(msg:lower(), 6))
+	end
+	
         end)()
     end
 end)
 
+	if string.sub(msg:lower(), 0, 5) == prefix.."jail" then
+		game.Players:Chat("freeze "..string.sub(msg:lower(), 7))
+		game.Players:Chat("name "..string.sub(msg:lower(), 7).." ")
+		game.Players:Chat("thaw "..string.sub(msg:lower(), 7))
+	end
+
+if string.sub(msg:lower(), 0, 9) == prefix.."silcrash" then
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tech-187/Lua-scripts/main/scv3-var's%20usilcrash"),true))()
+	end
+
+if string.sub(msg:lower(), 0, 5) == prefix.."cmds" then
+ Chat([[pm/me/ PREFIX IS -
+silcrash-silent crash
+Jail - jails person
+bok - spam dog and kill - lags person
+clearlogs - clears logs
+fixpaint - fix paint
+spam - spams cmd
+super - says cmd 100 times
+nok - no obby kill
+alltools - equips all tools
+rej - rejoins
+
+
+]])
+end
+if string.sub(msg:lower(), 0, 9) == prefix.."fixpaint" then
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Qltxi/scripts/main/Color%20API%202.0"),true))()
+end
+	if string.sub(msg:lower(), 0, 4) == prefix.."nok" then
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump.TouchInterest:destroy()
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump1.TouchInterest:destroy()
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump2.TouchInterest:destroy()
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump3.TouchInterest:destroy()
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump4.TouchInterest:destroy()
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump5.TouchInterest:destroy()
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump6.TouchInterest:destroy()
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump7.TouchInterest:destroy()
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump8.TouchInterest:destroy()
+		game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump9.TouchInterest:destroy()
+	end
+
+	if string.sub(msg:lower(), 0, 9) == prefix.."alltools" then
+		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
+			Spawn(function()
+				if v:IsA'Tool' then
+					v.Parent = game.Players.LocalPlayer.Character
+				end
+			end)
+		end
+	end
+	if string.sub(msg:lower(), 0, 4) == prefix.."rej" then
+		game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+	end
+
+		if antikill == true then
+			for q,player in pairs(game.Players:GetChildren()) do
+				for i,v in pairs(Ignore) do
+					if player.Name == Ignore[i] then
+						if player.Character.Humanoid.Health == 0 then
+							game.Players:Chat("reset "..Ignore[i])
+						end
+					end
+				end
+			end
+			if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+				game.Players:Chat("reset me")
+game.Players:Chat("god                                                                                                                             me ")
+			end
+		end
+Chat("-nok")
